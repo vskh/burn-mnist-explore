@@ -1,5 +1,6 @@
 use burn::nn::{Linear, LinearConfig, Relu};
 use burn::prelude::*;
+use burn::tensor::activation::softmax;
 
 #[derive(Debug, Module)]
 pub struct Model<B: Backend> {
@@ -7,6 +8,22 @@ pub struct Model<B: Backend> {
     hidden1: Linear<B>,
     hidden2: Linear<B>,
     output: Linear<B>,
+}
+
+impl<B: Backend> Model<B> {
+    pub fn forward(&self, images: Tensor<B, 2>) -> Tensor<B, 2> {
+        let [batch_size, pixel_count] = images.dims();
+    
+        let x = images;
+    
+        let x = self.hidden1.forward(x);
+        let x = self.activation.forward(x);
+        let x = self.hidden2.forward(x);
+        let x = self.activation.forward(x);
+        let x = self.output.forward(x);
+    
+        softmax(x, 1)
+    }
 }
 
 #[derive(Debug, Config)]
