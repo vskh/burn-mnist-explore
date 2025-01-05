@@ -3,6 +3,7 @@ use crate::model::ModelConfig;
 
 mod model;
 mod data;
+mod training;
 
 type BE = Wgpu;
 
@@ -12,5 +13,5 @@ fn main() {
 
     println!("Model: {}", model);
 
-    
+
 }
