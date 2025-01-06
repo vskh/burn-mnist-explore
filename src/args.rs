@@ -11,6 +11,14 @@ pub enum Mode {
 #[command(version = "0.1")]
 #[command(about = "Train model/classify using data from MNIST handwritten digits.", long_about = None)]
 pub struct Args {
-    #[arg(value_enum)]
-    pub mode: Mode
+    #[arg(long, value_enum)]
+    pub mode: Mode,
+
+    #[arg(
+        long,
+        requires_if("infer", "mode"),
+        value_name = "MNIST-ID",
+        long_help = "Image ID to give to the model from MNIST dataset. Dataset can be explored at https://observablehq.com/@davidalber/mnist-viewer"
+    )]
+    pub id: usize
 }

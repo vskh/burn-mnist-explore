@@ -32,7 +32,7 @@ fn main() {
             device,
         ),
         Mode::Infer => {
-            infer::<BE, _>(artifacts_dir, device, MnistDataset::test().get(42).unwrap())
+            infer::<BE, _>(artifacts_dir, device, MnistDataset::test().get(args.id).unwrap())
         }
     }
 }
