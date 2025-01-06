@@ -15,7 +15,7 @@ pub struct Model<B: Backend> {
 
 impl<B: Backend> Model<B> {
     pub fn forward(&self, images: Tensor<B, 2>) -> Tensor<B, 2> {
-        let [batch_size, pixel_count] = images.dims();
+        // let [batch_size, pixel_count] = images.dims();
 
         let x = images;
 
