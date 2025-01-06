@@ -25,7 +25,7 @@ impl<B: Backend> Batcher<MnistItem, MnistBatch<B>> for MnistBatcher<B> {
         let images = items
             .iter()
             .map(|item| TensorData::from(item.image).convert::<B::FloatElem>())
-            .map(|data| Tensor::<B, 1>::from_data(data, &self.device))
+            .map(|data| Tensor::<B, 2>::from_data(data, &self.device))
             .map(|tensor| tensor.reshape([1, 768]))
             // Normalize: make between [0,1] and make the mean=0 and std=1
             // values mean=0.1307,std=0.3081 are from the PyTorch MNIST example
